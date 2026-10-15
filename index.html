@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SearchSense | AI-Powered Website SEO Analyzer</title>
+  <meta name="description" content="Analyze website performance, accessibility, best practices, and SEO with SearchSense. Get Lighthouse scores and practical improvement suggestions.">
+  <link rel="canonical" href="https://arsh0012334.github.io/searchsense/">
+  <meta name="theme-color" content="#0b1020">
+  <meta property="og:title" content="SearchSense | Website SEO Analyzer">
+  <meta property="og:description" content="Run a Lighthouse-based website check and get practical next steps.">
+  <meta property="og:url" content="https://arsh0012334.github.io/searchsense/">
+  <meta property="og:type" content="website">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "SearchSense",
+    "url": "https://arsh0012334.github.io/searchsense/",
+    "description": "A student project prototype for analyzing website Lighthouse performance, accessibility, best practices, and SEO.",
+    "applicationCategory": "SEOApplication",
+    "operatingSystem": "Any"
+  }
+  </script>
+  <style>
+    :root{color-scheme:dark;--bg:#080d1b;--panel:#111a2d;--line:#26334d;--muted:#a7b4ca;--text:#f4f7ff;--accent:#8b9cff;--good:#67e8b1;--warn:#ffd27a;--bad:#ff8e9a}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#172449 0,#080d1b 48%);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);line-height:1.55}
+    .wrap{width:min(1050px,92%);margin:auto}.nav{padding:24px 0;display:flex;justify-content:space-between;align-items:center;gap:16px}.brand{font-weight:800;letter-spacing:.3px;font-size:1.15rem}.brand span{color:var(--accent)}.tag{font-size:.8rem;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 11px}
+    .hero{padding:50px 0 36px;max-width:800px}.eyebrow{color:var(--good);font-weight:700;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase}.hero h1{font-size:clamp(2.3rem,6vw,4.3rem);line-height:1.04;letter-spacing:-2px;margin:16px 0}.hero p{color:var(--muted);font-size:1.08rem;max-width:700px}
+    .search{display:flex;gap:10px;margin-top:26px;padding:9px;background:#0c1426;border:1px solid var(--line);border-radius:16px;max-width:780px}.search input{flex:1;min-width:0;background:transparent;border:0;color:var(--text);font:inherit;padding:12px;outline:none}.search button{border:0;border-radius:11px;background:var(--accent);color:#0a1021;font-weight:800;font:inherit;padding:12px 18px;cursor:pointer}.search button:disabled{opacity:.55;cursor:wait}
+    .hint{color:var(--muted);font-size:.83rem;margin-top:10px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:26px 0}.panel,.feature{background:rgba(17,26,45,.82);border:1px solid var(--line);border-radius:18px;padding:20px}.feature h3{margin:0 0 8px;font-size:1rem}.feature p{color:var(--muted);font-size:.91rem;margin:0}
+    .report{margin:30px 0;background:rgba(17,26,45,.76);border:1px solid var(--line);border-radius:22px;padding:24px}.report h2{margin:0 0 6px}.sub{color:var(--muted);margin:0 0 22px;font-size:.92rem}.scoregrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.score{background:#0b1325;border:1px solid var(--line);border-radius:15px;padding:16px}.score .label{font-size:.83rem;color:var(--muted)}.score .number{font-size:2rem;font-weight:800;margin-top:7px}.score .number small{font-size:.85rem;color:var(--muted)}.status{margin-top:18px;color:var(--muted);font-size:.92rem}.actions{display:grid;gap:10px;margin-top:16px}.action{padding:13px 15px;border:1px solid var(--line);border-radius:12px;background:#0b1325}.action strong{display:block}.action p{color:var(--muted);margin:4px 0 0;font-size:.9rem}.error{color:var(--warn)}.foot{color:var(--muted);font-size:.82rem;padding:26px 0 42px;border-top:1px solid var(--line);margin-top:36px}.foot a{color:var(--accent)}
+    @media(max-width:700px){.grid{grid-template-columns:1fr}.scoregrid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{padding-top:30px}.search{flex-direction:column}.search button{width:100%}.hero h1{letter-spacing:-1px}}
+  </style>
+</head>
+<body>
+  <header class="wrap nav">
+    <div class="brand">Search<span>Sense</span></div>
+    <div class="tag">SEO intelligence, made simple</div>
+  </header>
+  <main class="wrap">
+    <section class="hero">
+      <div class="eyebrow">Website SEO & performance analyzer</div>
+      <h1>Make your website easier to find.</h1>
+      <p>Run a Lighthouse-based check, understand key website quality signals, and get practical next steps to improve your site's search experience.</p>
+      <form class="search" id="scanForm">
+        <input id="siteUrl" type="url" placeholder="https://example.com" aria-label="Website URL" required>
+        <button id="scanButton" type="submit">Analyze website →</button>
+      </form>
+      <div class="hint">Enter a publicly accessible website URL. The report uses Google's PageSpeed Insights service and may take up to a minute.</div>
+    </section>
+
+    <section class="grid" aria-label="Features">
+      <article class="feature"><h3>01 / Real performance data</h3><p>Fetches Lighthouse category scores rather than inventing a result.</p></article>
+      <article class="feature"><h3>02 / Prioritized opportunities</h3><p>Turns available Lighthouse audit details into readable actions.</p></article>
+      <article class="feature"><h3>03 / Simple reporting</h3><p>Gives you a clear starting point for a website audit.</p></article>
+    </section>
+
+    <section class="report" aria-live="polite">
+      <h2>Analysis report</h2>
+      <p class="sub" id="reportSubtitle">Your report will appear here after you analyze a website.</p>
+      <div class="scoregrid">
+        <div class="score"><div class="label">Performance</div><div class="number" id="performance">—<small>/100</small></div></div>
+        <div class="score"><div class="label">Accessibility</div><div class="number" id="accessibility">—<small>/100</small></div></div>
+        <div class="score"><div class="label">Best practices</div><div class="number" id="bestPractices">—<small>/100</small></div></div>
+        <div class="score"><div class="label">SEO</div><div class="number" id="seo">—<small>/100</small></div></div>
+      </div>
+      <div id="status" class="status">Ready when you are.</div>
+      <h3>Recommended actions</h3>
+      <div id="actions" class="actions"><div class="action"><p>Run an analysis to see suggestions from Lighthouse.</p></div></div>
+    </section>
+
+    <section class="panel">
+      <h2>How SearchSense works</h2>
+      <p><strong>Analyze.</strong> Submit a publicly accessible website URL to request a Lighthouse report.</p>
+      <p><strong>Understand.</strong> Review performance, accessibility, SEO and best-practice scores where available.</p>
+      <p><strong>Improve.</strong> Use recommendations to prioritize practical fixes and re-test after changes.</p>
+    </section>
+    <footer class="foot">
+      <p><strong>SearchSense</strong> · Student mini-project prototype</p>
+      <p>This prototype uses Google's PageSpeed Insights API. It is not a full crawler and does not verify backlinks, keyword rankings, search indexing, Google Search Console, or Google Analytics. Results depend on the external service.</p>
+    </footer>
+  </main>
+  <script>
+    // API key is optional. If you later create one, set it here and restrict it in Google Cloud Console.
+    // Leaving this blank avoids publishing a secret, but Google's anonymous quota may be limited.
+    const PAGESPEED_API_KEY = "";
+    const form = document.getElementById("scanForm");
+    const button = document.getElementById("scanButton");
+    const statusEl = document.getElementById("status");
+    const actionsEl = document.getElementById("actions");
+    const subtitleEl = document.getElementById("reportSubtitle");
+    const scoreIds = {
+      performance: "performance",
+      accessibility: "accessibility",
+      "best-practices": "bestPractices",
+      seo: "seo"
+    };
+
+    function showScore(id, score) {
+      const el = document.getElementById(id);
+      el.replaceChildren();
+      if (typeof score !== "number" || !Number.isFinite(score)) {
+        el.append("N/A");
+      } else {
+        el.append(String(Math.round(score * 100)));
+      }
+      const small = document.createElement("small");
+      small.textContent = "/100";
+      el.append(small);
+    }
+
+    function safeUrl(value) {
+      const url = new URL(value);
+      if (!["http:", "https:"].includes(url.protocol)) throw new Error("Please enter a website address starting with https:// or http://.");
+      return url.href;
+    }
+
+    function addAction(title, description) {
+      const item = document.createElement("div");
+      item.className = "action";
+      const strong = document.createElement("strong");
+      strong.textContent = title;
+      const p = document.createElement("p");
+      p.textContent = description;
+      item.append(strong, p);
+      actionsEl.append(item);
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      let target;
+      try {
+        target = safeUrl(document.getElementById("siteUrl").value.trim());
+      } catch (error) {
+        statusEl.textContent = error.message || "Please enter a valid URL.";
+        statusEl.classList.add("error");
+        return;
+      }
+
+      button.disabled = true;
+      button.textContent = "Analyzing…";
+      statusEl.classList.remove("error");
+      statusEl.textContent = "Contacting PageSpeed Insights. This may take up to a minute…";
+      subtitleEl.textContent = "Website: " + target;
+      actionsEl.replaceChildren();
+      Object.values(scoreIds).forEach(id => showScore(id, null));
+
+      try {
+        const endpoint = new URL("https://www.googleapis.com/pagespeedonline/v5/runPagespeed");
+        endpoint.searchParams.set("url", target);
+        endpoint.searchParams.set("strategy", "mobile");
+        ["PERFORMANCE", "ACCESSIBILITY", "BEST_PRACTICES", "SEO"].forEach(category => endpoint.searchParams.append("category", category));
+        if (PAGESPEED_API_KEY.trim()) endpoint.searchParams.set("key", PAGESPEED_API_KEY.trim());
+
+        const response = await fetch(endpoint.toString());
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          const apiMessage = data?.error?.message || "The PageSpeed service could not complete the request.";
+          if (response.status === 429 || /quota|rate limit/i.test(apiMessage)) {
+            throw new Error("Google's free PageSpeed request limit was reached. Wait a little and try again. If it keeps happening, a Google API key may be needed.");
+          }
+          if (response.status === 400) throw new Error("The URL could not be analyzed. Check that it is public and spelled correctly.");
+          throw new Error(apiMessage + " (HTTP " + response.status + ")");
+        }
+
+        const categories = data?.lighthouseResult?.categories || {};
+        Object.entries(scoreIds).forEach(([key, id]) => showScore(id, categories[key]?.score));
+        const overall = categories.seo?.score ?? categories.performance?.score;
+        statusEl.textContent = "Analysis complete. Scores are from Lighthouse; results can vary between runs.";
+        if (overall === undefined) subtitleEl.textContent = "Partial report for " + target;
+        const audits = data?.lighthouseResult?.audits || {};
+        const selected = Object.values(audits)
+          .filter(a => a && a.scoreDisplayMode === "opportunity" && typeof a.score === "number" && a.score < 1 && a.title)
+          .sort((a,b) => (b.details?.overallSavingsMs || 0) - (a.details?.overallSavingsMs || 0))
+          .slice(0, 8);
+        if (!selected.length) {
+          addAction("Review the full Lighthouse report", "No qualifying opportunities were returned for this run. Re-test and inspect the website manually as well.");
+        } else {
+          selected.forEach(a => {
+            let detail = a.description || "Review this audit and follow the recommended fix.";
+            detail = detail.replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g, "$1 ($2)");
+            addAction(a.title, detail);
+          });
+        }
+      } catch (error) {
+        statusEl.classList.add("error");
+        statusEl.textContent = error.message || "Something went wrong. Please try again.";
+        addAction("Try again later", "Confirm the URL is public, wait briefly if the service is rate-limited, then run the scan again.");
+      } finally {
+        button.disabled = false;
+        button.textContent = "Analyze website →";
+      }
+    });
+  </script>
+</body>
+</html>
